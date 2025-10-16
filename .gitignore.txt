@@ -1,0 +1,15 @@
+# macOS system files
+.DS_Store
+
+# Node or build output (if you ever add tooling)
+node_modules/
+dist/
+build/
+
+# Editor or IDE configs
+.vscode/
+.idea/
+
+# Logs or temp
+*.log
+*.tmp
