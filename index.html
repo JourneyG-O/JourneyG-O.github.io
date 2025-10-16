@@ -418,7 +418,7 @@
     setTimeout(()=>toast.classList.remove('show'), 1800);
   }
   document.querySelectorAll('.app-card').forEach(card=>{
-    card.addEventListener('click', ()=> showToast('준비 중입니다.'));
+    card.addEventListener('click', ()=> showToast('Coming soon.'));
   });
 
 const emailTile = document.querySelector('.contact-email');
@@ -431,6 +431,12 @@ const emailTile = document.querySelector('.contact-email');
       }catch(e){ showToast('복사에 실패했습니다.'); }
     });
   }
+  document.querySelectorAll('.contact-grid a.tile').forEach(link=>{
+    link.addEventListener('click', (e)=>{
+      e.preventDefault();
+      showToast('Coming soon.');
+    });
+  });
 </script>
 </body>
 </html>
