@@ -21,6 +21,7 @@
     line-height:1.7; scroll-behavior:smooth;
     scroll-snap-type: y mandatory;
     overflow-y: scroll;
+    overflow-x: hidden;
     height: 100%;
   }
   a{color:inherit; text-decoration:none}
@@ -123,7 +124,9 @@
   section{ padding:96px 20px }
   .wrap{ max-width:720px; margin:0 auto }
   .hero{
-    position:relative; padding-top:40px;
+    position:relative;
+    padding-top:40px;
+    overflow:hidden;
   }
   .ghost-cube{
     position:absolute; right:-40px; bottom:-20px; width:360px; height:360px; opacity:.1; pointer-events:none;
@@ -163,10 +166,20 @@
   .app-card:hover{ transform: translateY(-3px); box-shadow: 0 10px 24px rgba(0,0,0,.06) }
   .app-top{ display:flex; gap:14px; align-items:center; margin-bottom:10px }
   .app-icon{
-    width:72px; height:72px; border-radius:16px; overflow:hidden;
+    width: clamp(56px, 18vw, 72px);
+    aspect-ratio: 1 / 1;
+    border-radius:16px;
+    overflow:hidden;
     background: linear-gradient(180deg,#e9e9e9,#f8f8f8);
-    border: 2px solid #000; /* 🔹 검은색 테두리 추가 */
+    border: 2px solid #000; /* 🔹 검은색 테두리 유지 */
     display:grid; place-items:center;
+  }
+
+  .app-icon img{
+    width:100%;
+    height:100%;
+    object-fit: contain;
+    display:block;
   }
   .app-icon img{ width:100%; height:100%; object-fit:cover; display:block }
   .app-icon svg{ display:none }
