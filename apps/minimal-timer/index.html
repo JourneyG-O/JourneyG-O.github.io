@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Minimal Timer — Overview</title>
+<style>
+  :root{ --bg:#ffffff; --fg:#111; --muted:#6e6e6e; --line:#eaeaea; --maxw:720px; }
+
+  html,body{
+    margin:0;
+    background:var(--bg);
+    color:var(--fg);
+    font-family:system-ui,-apple-system,Inter,"Apple SD Gothic Neo",Malgun Gothic,sans-serif;
+    line-height:1.7;
+  }
+
+  a {
+    color: inherit;             /* 🔹 파란색 제거 */
+    text-decoration: none;      /* 🔹 밑줄 제거 */
+  }
+
+  .wrap{ max-width:var(--maxw); margin:0 auto; padding:24px 20px 56px; }
+  .hero{ min-height:36vh; display:grid; place-items:center; border-bottom:1px solid var(--line); }
+  .hero .placeholder{ color:var(--muted); font-size:14px; }
+
+  .legal-cta{ padding:24px 0; }
+  .legal-cta h2{ margin:0 0 12px; font-size:18px; font-weight:700; }
+  .links{ display:flex; gap:12px; flex-wrap:wrap }
+
+  .chip{
+    border:1px solid var(--line);
+    border-radius:999px;
+    padding:8px 12px;
+    font-size:14px;
+    display:inline-block;
+    color:var(--fg);            /* 🔹 텍스트색 유지 */
+    background:#fff;
+    cursor:pointer;
+    transition:background 0.2s ease;
+  }
+
+  .chip:hover{
+    background:#f7f7f7;
+  }
+</style>
+</head>
+<body>
+  <main class="wrap">
+    <section class="hero" aria-label="Intro">
+      <div class="placeholder">
+        App introduction area (screenshots, features, pricing, FAQ, and download section coming soon)
+      </div>
+    </section>
+
+    <section class="legal-cta" aria-labelledby="legal-title">
+      <h2 id="legal-title">Legal Information</h2>
+      <p style="margin:8px 0 16px; color:var(--muted)">
+        You can view the essential legal documents related to Minimal Timer below.
+      </p>
+      <div class="links">
+        <a class="chip" href="./legal/terms.html">Terms of Service</a>
+        <a class="chip" href="./legal/privacy.html">Privacy Policy</a>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
