@@ -31,716 +31,134 @@
       }
     }
 
-    * {
-      box-sizing: border-box
-    }
+    * { box-sizing: border-box }
 
-    html,
-    body {
-      margin: 0;
-      color: var(--fg);
-      background: var(--bg);
+    html, body {
+      margin: 0; color: var(--fg); background: var(--bg);
       font-family: system-ui, -apple-system, Inter, "Apple SD Gothic Neo", Malgun Gothic, sans-serif;
-      line-height: 1.7;
-      scroll-behavior: smooth;
-      scroll-snap-type: y mandatory;
-      overflow-y: scroll;
+      line-height: 1.7; scroll-behavior: smooth;
       overflow-x: hidden;
-      height: 100%;
     }
 
-    a {
-      color: inherit;
-      text-decoration: none
-    }
+    a { color: inherit; text-decoration: none }
 
-    .visual,
-    .hero,
-    .apps-section,
-    .contact {
-      scroll-snap-align: start;
-      scroll-snap-stop: always;
-      min-height: 100vh;
-      scroll-margin-top: 80px;
-    }
-
-    footer {
-      scroll-snap-align: start;
-      scroll-snap-stop: always;
-      scroll-margin-top: 80px;
-    }
-
-    footer {
-      scroll-snap-align: start;
-    }
-
+    /* Header */
     .header {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 80px;
-      z-index: 1000;
-      backdrop-filter: saturate(180%) blur(6px);
-      background: rgba(255, 255, 255, .9);
+      position: fixed; top: 0; left: 0; right: 0; height: 80px; z-index: 1000;
+      backdrop-filter: saturate(180%) blur(6px); background: rgba(255, 255, 255, .9);
       border-bottom: 1px solid var(--line);
     }
-
     .header-inner {
-      width: 100%;
-      height: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 40px;
+      max-width: var(--maxw); margin: 0 auto; height: 100%;
+      display: flex; align-items: center; justify-content: space-between; padding: 0 20px;
     }
+    .brand { display: flex; align-items: center; gap: 10px; font-weight: 700; letter-spacing: .3px }
+    .brand img { width: 24px; height: 24px; display: block }
+    .nav a { margin-left: 24px; font-size: 15px }
+    .nav a:hover { opacity: .7 }
 
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-weight: 700;
-      letter-spacing: .3px
-    }
-
-    .brand img {
-      width: 24px;
-      height: 24px;
-      display: block
-    }
-
-    @media (max-width: 600px) {
-      .brand img {
-        width: 20px;
-        height: 20px
-      }
-    }
-
-    .nav a {
-      margin-left: 24px;
-      font-size: 15px
-    }
-
-    .nav a:hover {
-      opacity: .7
-    }
-
-    @media (max-width: 600px) {
-      .header-inner {
-        padding: 0 20px
-      }
-
-      .nav a {
-        margin-left: 16px;
-        font-size: 14px
-      }
-    }
-
+    /* Visual Section */
     .visual {
-      position: relative;
-      height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      position: relative; height: 100vh;
+      display: flex; align-items: center; justify-content: center;
       background: radial-gradient(1200px 800px at 50% 40%, #fafafa, #ffffff 70%);
       overflow: hidden;
     }
-
     .light {
-      position: absolute;
-      width: 340px;
-      height: 340px;
-      border-radius: 50%;
+      position: absolute; width: 340px; height: 340px; border-radius: 50%;
       background: radial-gradient(circle, rgba(200, 200, 200, .45), transparent 70%);
-      filter: blur(70px);
-      animation: pulse var(--pulse-duration) ease-in-out infinite alternate;
-      pointer-events: none;
+      filter: blur(70px); animation: pulse var(--pulse-duration) ease-in-out infinite alternate;
     }
-
-    .orbit,
-    .orbit2 {
-      position: absolute;
-      border-radius: 50%;
-      pointer-events: none;
-      border: 1px solid rgba(0, 0, 0, .12);
-    }
-
-    .orbit {
-      width: 380px;
-      height: 380px;
-      animation: rotate var(--orbit-duration) linear infinite;
-    }
-
-    .orbit2 {
-      width: 460px;
-      height: 460px;
-      border-style: dashed;
-      opacity: .25;
-      animation: rotateReverse calc(var(--orbit-duration)*1.2) linear infinite;
-    }
-
     .cube {
-      position: relative;
-      width: 200px;
-      height: 200px;
-
-      /* 로고 이미지 표시 */
+      position: relative; width: 200px; height: 200px;
       background: url('./assets/images/stannum_logo.png') center / contain no-repeat;
-
-      /* 배경, 그림자, 둥근 모서리 제거 */
-      border-radius: 0;
-      box-shadow: none;
-      background-color: transparent;
-
-      /* 애니메이션 유지 */
       animation: float var(--float-duration) ease-in-out infinite alternate;
-      will-change: transform;
-      transform-style: preserve-3d;
     }
-
-    .scroll-hint {
-      position: absolute;
-      bottom: 22px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 20px;
-      height: 26px;
-      opacity: .85;
-      animation: arrowBounce 1.6s ease-in-out infinite;
-    }
-
-    .scroll-hint svg {
-      width: 100%;
-      height: 100%;
-      display: block
-    }
-
     .brand-under {
-      position: absolute;
-      left: 50%;
-      bottom: 60px;
-      /* 화살표(bottom:22px)와 겹치지 않게 간격 확보 */
-      transform: translateX(-50%);
-      font-size: 20px;
-      font-weight: 700;
-      letter-spacing: 0.3px;
-      color: #111;
-      opacity: 0;
+      position: absolute; left: 50%; bottom: 60px; transform: translateX(-50%);
+      font-size: 20px; font-weight: 700; opacity: 0;
       animation: brandUnderIn .9s ease-out .15s forwards;
-      /* 약간 딜레이 후 페이드인 */
-      user-select: none;
-      pointer-events: none;
-      /* 클릭 방해 X */
     }
 
-    @keyframes brandUnderIn {
-      from {
-        opacity: 0;
-        transform: translate(-50%, 8px);
-      }
+    /* Hero Section */
+    .hero { padding: 160px 20px 80px; text-align: center; }
+    .tagline { font-size: 44px; font-weight: 800; margin-bottom: 16px; letter-spacing: -0.02em; }
+    .subcopy { color: var(--muted); font-size: 18px; margin-bottom: 32px; }
 
-      to {
-        opacity: .9;
-        transform: translate(-50%, 0);
-      }
+    /* Apps Section (The Minimal Stack) */
+    .apps-section { padding: 120px 20px; }
+    .apps-container { max-width: 840px; margin: 0 auto; display: flex; flex-direction: column; gap: 100px; }
+    
+    .app-row {
+      display: flex; align-items: center; gap: 60px;
+      opacity: 0; transform: translateY(30px);
+      transition: all 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
     }
+    .app-row.on { opacity: 1; transform: translateY(0); }
+    .app-row:nth-child(even) { flex-direction: row-reverse; }
 
-    @media (max-width: 420px) {
-      .brand-under {
-        font-size: 18px;
-        bottom: 56px;
-      }
+    .app-visual { flex: 1; display: flex; justify-content: center; }
+    .app-main-icon {
+      width: 140px; height: 140px; border-radius: 32px;
+      border: 2px solid #000; padding: 4px; background: #fff;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.08); transition: transform 0.3s ease;
     }
+    .app-row:hover .app-main-icon { transform: scale(1.05) rotate(-2deg); }
 
+    .app-info-box { flex: 1.2; text-align: left; }
+    .app-row:nth-child(even) .app-info-box { text-align: right; }
 
-    section {
-      padding: 96px 20px
+    .app-title-big { font-size: 32px; font-weight: 800; margin: 12px 0; letter-spacing: -0.5px; }
+    .app-description-text { font-size: 16px; color: var(--muted); line-height: 1.6; margin-bottom: 24px; word-break: keep-all; }
+    
+    .badges { display: flex; gap: 8px; margin-bottom: 12px; }
+    .app-row:nth-child(even) .badges { justify-content: flex-end; }
+    .badge { font-size: 11px; font-weight: 600; padding: 4px 10px; border-radius: 6px; background: #f5f5f7; color: #86868b; }
+
+    .app-link-btn {
+      display: inline-flex; align-items: center; padding: 10px 20px;
+      background: #111; color: #fff; border-radius: 999px;
+      font-size: 14px; font-weight: 600; transition: transform 0.2s;
     }
+    .app-link-btn:hover { transform: scale(1.03); background: #333; }
 
-    .wrap {
-      max-width: 720px;
-      margin: 0 auto
-    }
-
-    .hero {
-      position: relative;
-      padding-top: 40px;
-      overflow: hidden;
-    }
-
-    .ghost-cube {
-      position: absolute;
-      right: -40px;
-      bottom: -20px;
-      width: 360px;
-      height: 360px;
-      opacity: .1;
-      pointer-events: none;
-      background: radial-gradient(circle at 30% 30%, rgba(0, 0, 0, .06), transparent 60%);
-      mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox=\'0 0 100 100\'><polygon points=\'50,5 95,27 95,73 50,95 5,73 5,27\' fill=\'%23000\'/></svg>') center / contain no-repeat;
-    }
-
-    .tagline {
-      font-size: 44px;
-      font-weight: 800;
-      letter-spacing: -.3px;
-      margin: 0 0 16px;
-      background: linear-gradient(180deg, #111 0%, #333 100%);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-    }
-
-    .accent-line {
-      width: 0;
-      height: 1px;
-      background: #cfcfcf;
-      margin: 8px 0 18px;
-      transition: width .6s ease;
-    }
-
-    .subcopy {
-      color: var(--muted);
-      font-size: 16.5px
-    }
-
-    .cta {
-      display: inline-block;
-      margin-top: 22px;
-      padding: 10px 16px;
-      border: 1px solid var(--line);
-      border-radius: 10px;
-      font-size: 14px
-    }
-
-    .cta:hover {
-      background: #f7f7f7
-    }
-
-    .reveal {
-      opacity: 0;
-      transform: translateY(18px);
-      transition: all .7s ease
-    }
-
-    .reveal.on {
-      opacity: 1;
-      transform: translateY(0)
-    }
-
-    .reveal.on+.accent-line {
-      width: 72px
-    }
-
-    @media (max-width:600px) {
-      .tagline {
-        font-size: 34px
-      }
-    }
-
-    .apps-section {
-      padding: 120px 20px 80px;
-      background: #fff
-    }
-
-    .apps-wrap {
-      max-width: var(--maxw);
-      margin: 0 auto;
-      text-align: center
-    }
-
-    .apps-wrap h2 {
-      font-size: 28px;
-      font-weight: 700;
-      margin-bottom: 8px
-    }
-
-    .apps-wrap p {
-      color: var(--muted);
-      margin-bottom: 40px
-    }
-
-    .apps-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: var(--gap);
-    }
-
-    .app-card {
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      padding: 16px;
-      background: #fff;
-      transition: transform .2s, box-shadow .2s;
-      cursor: pointer;
-      position: relative;
-    }
-
-    .app-card>.card-link {
-      position: absolute;
-      inset: 0;
-      /* top/right/bottom/left = 0 */
-      z-index: 3;
-    }
-
-    /* 시맨틱 레이아웃은 그대로 보이도록 실제 컨텐츠는 위로 */
-    .app-card>.app-top {
-      position: relative;
-      z-index: 1;
-    }
-
-    .app-card:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 10px 24px rgba(0, 0, 0, .06)
-    }
-
-    .app-top {
-      display: flex;
-      gap: 14px;
-      align-items: center;
-      margin-bottom: 10px
-    }
-
-    .app-icon {
-      width: clamp(56px, 18vw, 72px);
-      aspect-ratio: 1 / 1;
-      border-radius: 16px;
-      overflow: hidden;
-      background: linear-gradient(180deg, #e9e9e9, #f8f8f8);
-      border: 2px solid #000;
-      /* 🔹 검은색 테두리 유지 */
-      display: grid;
-      place-items: center;
-    }
-
-    .app-icon img {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-      display: block;
-    }
-
-    .app-icon img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block
-    }
-
-    .app-icon svg {
-      display: none
-    }
-
-    .app-name {
-      margin: 0;
-      font-size: 18px;
-      font-weight: 700;
-      letter-spacing: .2px
-    }
-
-    .app-desc {
-      margin: 4px 0 10px;
-      color: var(--muted)
-    }
-
-    .badges {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap
-    }
-
-    .badge {
-      font-size: 12px;
-      color: #444;
-      border: 1px solid var(--line);
-      padding: 4px 8px;
-      border-radius: 999px;
-    }
-
-    .app-card button {
-      margin-top: 12px;
-      border: 1px solid var(--line);
-      background: #fff;
-      border-radius: 10px;
-      font-size: 14px;
-      padding: 8px 12px;
-      cursor: pointer;
-    }
-
-    .app-card button:hover {
-      background: #f7f7f7
-    }
-
-    .contact {
-      padding: 120px 20px 120px;
-      background: #fff
-    }
-
-    .contact .wrap {
-      max-width: 680px
-    }
-
-    .contact h2 {
-      margin: 0 0 8px;
-      font-size: 26px;
-      font-weight: 700
-    }
-
-    .contact p.lead {
-      color: var(--muted);
-      margin: 0 0 24px
-    }
-
-    .contact-wrap {
-      text-align: center
-    }
-
+    /* Contact & Footer */
+    .contact { padding: 120px 20px; text-align: center; border-top: 1px solid var(--line); }
     .contact-grid {
-      margin-top: 20px;
-      display: grid;
-      gap: var(--gap);
-      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: 20px; max-width: 600px; margin: 40px auto 0;
     }
-
     .tile {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      padding: 24px;
-      border: 1px solid var(--line);
-      border-radius: 16px;
-      background: #fff;
-      transition: transform .18s ease, box-shadow .18s ease, background .18s ease;
-      aspect-ratio: 1 / 0.8;
-      width: 100%;
-      height: auto;
-      box-sizing: border-box;
-      align-content: center;
-      justify-content: center;
-      text-align: center;
+      display: flex; flex-direction: column; align-items: center; gap: 12px;
+      padding: 24px; border: 1px solid var(--line); border-radius: 16px;
+      transition: all 0.2s ease; cursor: pointer;
     }
+    .tile:hover { background: #f7f7f7; transform: translateY(-2px); }
+    .contact-icon { width: 32px; height: 32px; object-fit: contain; }
 
-    .tile:hover {
-      transform: translateY(-2px);
-      background: #f7f7f7;
-      box-shadow: 0 10px 24px rgba(0, 0, 0, .06)
-    }
+    footer { padding: 60px 20px; text-align: center; border-top: 1px solid var(--line); color: var(--muted); font-size: 14px; }
 
-    .tile svg {
-      width: 36px;
-      height: 36px;
-      stroke: #111
-    }
+    /* Animations */
+    @keyframes float { 0% { transform: translateY(0) } 100% { transform: translateY(-20px) } }
+    @keyframes pulse { 0% { opacity: .5 } 100% { opacity: 1 } }
+    @keyframes brandUnderIn { from { opacity: 0; transform: translate(-50%, 10px) } to { opacity: 1; transform: translate(-50%, 0) } }
 
-    .tile span {
-      font-weight: 600
-    }
-
-    .contact-icon {
-      width: 50%;
-      height: auto;
-      object-fit: contain;
-    }
-
-    /* 버튼/링크 기본 스타일 통일 */
-    .tile.button {
-      cursor: pointer
-    }
-
-    .contact-card {
-      border: 1px solid var(--line);
-      border-radius: 16px;
-      padding: 20px;
-      display: grid;
-      gap: 14px;
-      background: #fff;
-    }
-
-    .contact-row {
-      display: flex;
-      gap: 12px;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap
-    }
-
-    .contact-left {
-      display: flex;
-      gap: 10px;
-      align-items: center
-    }
-
-    .label {
-      font-size: 13px;
-      color: #555;
-      background: #f7f7f7;
-      border: 1px solid var(--line);
-      padding: 4px 8px;
-      border-radius: 999px
-    }
-
-    .value {
-      font-weight: 600
-    }
-
-    .contact-actions {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap
-    }
-
-    .btn {
-      border: 1px solid var(--line);
-      background: #fff;
-      border-radius: 10px;
-      padding: 8px 12px;
-      font-size: 14px;
-    }
-
-    .btn:hover {
-      background: #f7f7f7
-    }
-
-    .contact-row.social-row {
-      justify-content: flex-start;
-    }
-
-    .contact-row.social-row {
-      justify-content: flex-start;
-      align-items: center;
-    }
-
-    .contact-left {
-      min-width: 88px;
-      /* 라벨 폭 고정(대략) */
-    }
-
-    .socials {
-      display: flex;
-      gap: 12px;
-      margin-top: 6px;
-      margin-left: 8px
-    }
-
-    .socials a {
-      display: inline-flex;
-      width: 22px;
-      height: 22px;
-      align-items: center;
-      justify-content: center
-    }
-
-    .socials svg {
-      width: 18px;
-      height: 18px;
-      stroke: #111
-    }
-
-    footer {
-      border-top: 1px solid var(--line);
-      padding: 48px 20px;
-      text-align: center
-    }
-
-    .footer-brand {
-      font-weight: 700;
-      margin-bottom: 8px
-    }
-
-    .footer-slogan {
-      font-size: 14px;
-      color: var(--muted);
-      margin: 2px 0
-    }
-
-    .toast {
-      position: fixed;
-      left: 50%;
-      bottom: 28px;
-      transform: translateX(-50%);
-      background: #111;
-      color: #fff;
-      font-size: 13px;
-      padding: 8px 12px;
-      border-radius: 10px;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity .2s ease;
-      z-index: 2000;
-    }
-
-    .toast.show {
-      opacity: 1
-    }
-
-    @keyframes float {
-      0% {
-        transform: translateY(0) rotate(0)
-      }
-
-      100% {
-        transform: translateY(calc(-1 * var(--float-translate))) rotate(var(--float-rotate))
-      }
-    }
-
-    @keyframes pulse {
-      0% {
-        transform: scale(.92);
-        opacity: .85
-      }
-
-      100% {
-        transform: scale(1.08);
-        opacity: 1
-      }
-    }
-
-    @keyframes rotate {
-      from {
-        transform: rotate(0)
-      }
-
-      to {
-        transform: rotate(360deg)
-      }
-    }
-
-    @keyframes rotateReverse {
-      from {
-        transform: rotate(360deg)
-      }
-
-      to {
-        transform: rotate(0)
-      }
-    }
-
-    @keyframes arrowBounce {
-
-      0%,
-      100% {
-        transform: translate(-50%, 0);
-        opacity: .35
-      }
-
-      50% {
-        transform: translate(-50%, -8px);
-        opacity: 1
-      }
+    @media (max-width: 768px) {
+      .app-row, .app-row:nth-child(even) { flex-direction: column; text-align: center; gap: 32px; }
+      .app-row:nth-child(even) .app-info-box { text-align: center; }
+      .app-row:nth-child(even) .badges { justify-content: center; }
+      .tagline { font-size: 32px; }
     }
   </style>
 </head>
 
 <body>
-  <header class="header" role="banner">
+  <header class="header">
     <div class="header-inner">
-      <a class="brand" href="#top" aria-label="Stannum (Home)">
-        <img src="./assets/images/stannum_mark.svg" alt="Stannum 로고" width="24" height="24" />
-        Stannum
+      <a class="brand" href="#top">
+        <img src="./assets/images/stannum_mark.svg" alt="Logo"> Stannum
       </a>
-      <nav class="nav" aria-label="Primary">
+      <nav class="nav">
         <a href="#apps">Apps</a>
         <a href="#contact">Contact</a>
       </nav>
@@ -749,192 +167,122 @@
 
   <div id="top" class="visual">
     <div class="light"></div>
-    <div class="orbit" aria-hidden="true"></div>
-    <div class="orbit2" aria-hidden="true"></div>
-    <div class="cube" id="cube" aria-label="Brand visual"></div>
+    <div class="cube" id="cube"></div>
     <div class="brand-under">Stannum</div>
-    <div class="scroll-hint" aria-hidden="true">
-      <svg viewBox="0 0 24 24" fill="none" stroke="#777" stroke-width="1.5" stroke-linecap="round"
-        stroke-linejoin="round">
-        <path d="M6 9l6 6 6-6" />
-      </svg>
-    </div>
   </div>
 
-  <section class="hero" aria-labelledby="tagline">
-    <div class="ghost-cube" aria-hidden="true"></div>
+  <section class="hero">
     <div class="wrap">
-      <h1 id="tagline" class="tagline reveal">Every day, by your side.</h1>
-      <div class="accent-line"></div>
-      <p class="subcopy reveal" style="transition-delay:.08s">
-        Stannum creates humble apps.<br>
-        Always close when you need them most,<br>
-        quietly blending into your everyday life.
-      </p>
-      <a href="#apps" class="cta reveal" style="transition-delay:.16s">View Apps →</a>
+      <h1 class="tagline">Every day, by your side.</h1>
+      <p class="subcopy">Small tools that blend quietly into your everyday life.</p>
     </div>
   </section>
 
-  <section id="apps" class="apps-section" aria-labelledby="apps-title">
-    <div class="apps-wrap">
-      <h2 id="apps-title">Our Apps</h2>
-
-      <div class="apps-grid">
-        <article class="app-card">
-          <a class="card-link" href="apps/yearjourney/index.html" aria-label="Year Journey page"></a>
-          <div class="app-top">
-            <div class="app-icon">
-              <img src="./assets/images/apps/YearJourney.png" alt="Year Journey icon" onerror="this.style.display='none'">
-            </div>
-            <div>
-              <h3 class="app-name">Year Journey</h3>
-              <p class="app-desc">A year-progress widget with your animal companions.</p>
-              <div class="badges">
-                <span class="badge">iOS</span>
-                <span class="badge">Widget</span>
-              </div>
-            </div>
+  <section id="apps" class="apps-section">
+    <div class="apps-container">
+      
+      <div class="app-row reveal">
+        <div class="app-visual">
+          <img src="./assets/images/apps/YearJourney.png" alt="Year Journey" class="app-main-icon">
+        </div>
+        <div class="app-info-box">
+          <div class="badges">
+            <span class="badge">iOS</span>
+            <span class="badge">Widget</span>
           </div>
-        </article>
-        
-        <article class="app-card">
-          <a class="card-link" href="apps/minitime/index.html" aria-label="minitime page"></a>
-          <div class="app-top">
-            <div class="app-icon">
-              <img src="./assets/images/apps/minitime.png" alt="minitime icon"
-                onerror="this.style.display='none'">
-              <svg viewBox="0 0 24 24" stroke="#666" fill="none" stroke-width="1.5" stroke-linecap="round"
-                stroke-linejoin="round" aria-hidden="true">
-                <circle cx="12" cy="13" r="7" />
-                <path d="M12 6V3M9 3h6M12 13l3-2" />
-              </svg>
-            </div>
-            <div>
-              <h3 class="app-name">MiniTime</h3>
-              <p class="app-desc">A minimal focus timer operated with a single tap and drag.</p>
-              <div class="badges">
-                <span class="badge">iPhone</span>
-                <span class="badge">iPad</span>
-              </div>
-            </div>
-          </div>
-        </article>
-
-        <article class="app-card" data-state="coming-soon">
-          <div class="app-top">
-            <div class="app-icon">
-              <img src="./assets/images/apps/minilink.png" alt="MiniLink icon" onerror="this.style.display='none'">
-              <svg viewBox="0 0 24 24" stroke="#666" fill="none" stroke-width="1.5" stroke-linecap="round"
-                stroke-linejoin="round" aria-hidden="true">
-                <path d="M10 13a5 5 0 0 0 7.07 0l2.12-2.12a5 5 0 0 0-7.07-7.07L10 5" />
-                <path d="M14 11a5 5 0 0 0-7.07 0L4.8 13.13a5 5 0 1 0 7.07 7.07L14 19" />
-              </svg>
-            </div>
-            <div>
-              <h3 class="app-name">MiniLink</h3>
-              <p class="app-desc">Simplifying how you collect, organize, and rediscover links.</p>
-              <div class="badges"><span class="badge">iPhone</span></div>
-            </div>
-          </div>
-        </article>
+          <h3 class="app-title-big">Year Journey</h3>
+          <p class="app-description-text">
+            Track your year's progress with adorable animal companions. 
+            A warm visualization of time passing.
+          </p>
+          <a href="apps/yearjourney/index.html" class="app-link-btn">Explore App →</a>
+        </div>
       </div>
+
+      <div class="app-row reveal">
+        <div class="app-visual">
+          <img src="./assets/images/apps/minitime.png" alt="MiniTime" class="app-main-icon">
+        </div>
+        <div class="app-info-box">
+          <div class="badges">
+            <span class="badge">iPhone</span>
+            <span class="badge">iPad</span>
+          </div>
+          <h3 class="app-title-big">MiniTime</h3>
+          <p class="app-description-text">
+            A minimal focus timer designed for simplicity. 
+            Operated with a single tap and drag.
+          </p>
+          <a href="apps/minitime/index.html" class="app-link-btn">View Details →</a>
+        </div>
+      </div>
+
+      <div class="app-row reveal">
+        <div class="app-visual">
+          <img src="./assets/images/apps/minilink.png" alt="MiniLink" class="app-main-icon" style="filter: grayscale(1); opacity: 0.5;">
+        </div>
+        <div class="app-info-box">
+          <div class="badges">
+            <span class="badge">Coming Soon</span>
+          </div>
+          <h3 class="app-title-big" style="color: #ccc;">MiniLink</h3>
+          <p class="app-description-text">
+            Simplifying how you collect and rediscover links. 
+            Stay tuned for the new way of curation.
+          </p>
+        </div>
+      </div>
+
     </div>
   </section>
 
-  <section id="contact" class="contact" aria-labelledby="contact-title">
-    <div class="wrap contact-wrap">
-      <h2 id="contact-title">Contact</h2>
-      <!-- ▼ 미니멀 4타일 버튼 -->
-      <div class="contact-grid" role="group" aria-label="연락 방법">
-        <!-- Email: 클릭 시 이메일 주소 복사 -->
-        <button class="tile button contact-email" type="button" aria-label="Copy email address"
-          data-email="contact@stannum.app">
-          <img src="./assets/images/socials/email.png" alt="Email icon" class="contact-icon" />
-        </button>
-        <!-- Threads -->
-        <a class="tile" href="#" target="_blank" rel="noopener" aria-label="Threads">
-          <img src="./assets/images/socials/threads.png" alt="Threads icon" class="contact-icon" />
+  <section id="contact" class="contact">
+    <div class="wrap">
+      <h2>Contact</h2>
+      <div class="contact-grid">
+        <div class="tile contact-email" data-email="contact@stannum.app">
+          <img src="./assets/images/socials/email.png" alt="Email" class="contact-icon">
+          <span>Email</span>
+        </div>
+        <a class="tile" href="#">
+          <img src="./assets/images/socials/threads.png" alt="Threads" class="contact-icon">
+          <span>Threads</span>
         </a>
-        <!-- Instagram -->
-        <a class="tile" href="#" target="_blank" rel="noopener" aria-label="Instagram">
-          <img src="./assets/images/socials/instagram.png" alt="Instagram icon" class="contact-icon" />
+        <a class="tile" href="#">
+          <img src="./assets/images/socials/instagram.png" alt="Instagram" class="contact-icon">
+          <span>Instagram</span>
         </a>
-        <!-- X -->
-        <a class="tile" href="#" target="_blank" rel="noopener" aria-label="X (Twitter)">
-          <img src="./assets/images/socials/x.png" alt="X icon" class="contact-icon" />
+        <a class="tile" href="#">
+          <img src="./assets/images/socials/x.png" alt="X" class="contact-icon">
+          <span>X</span>
         </a>
       </div>
     </div>
   </section>
 
-  <footer role="contentinfo">
+  <footer>
     <div class="footer-brand">Stannum</div>
-    <div class="footer-slogan" style="opacity:.8">Small tools that stay close.</div>
+    <div>© 2026 Stannum. All rights reserved.</div>
   </footer>
 
-  <div id="toast" class="toast" role="status" aria-live="polite"></div>
-
   <script>
-    const cube = document.getElementById('cube');
-    const visual = document.querySelector('.visual');
-    let rx = 0, ry = 0;
-    function lerp(a, b, t) { return a + (b - a) * t; }
-    visual.addEventListener('mousemove', (e) => {
-      const r = visual.getBoundingClientRect();
-      const x = (e.clientX - r.left) / r.width;
-      const y = (e.clientY - r.top) / r.height;
-      const targetRy = (x - 0.5) * 14;
-      const targetRx = (0.5 - y) * 14;
-      rx = lerp(rx, targetRx, 0.18);
-      ry = lerp(ry, targetRy, 0.18);
-    });
-    (function tick() {
-      cube.style.transform = `translateY(-${getComputedStyle(document.documentElement).getPropertyValue('--float-translate')})
-                            rotateX(${rx}deg) rotateY(${ry}deg)`;
-      requestAnimationFrame(tick);
-    })();
-
+    // Reveal animation
     const reveals = document.querySelectorAll('.reveal');
-    const io = new IntersectionObserver((entries) => {
+    const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           entry.target.classList.add('on');
-          io.unobserve(entry.target);
         }
-      })
-    }, { threshold: 0.2 });
-    reveals.forEach(el => io.observe(el));
-
-    const toast = document.getElementById('toast');
-    function showToast(msg) {
-      toast.textContent = msg;
-      toast.classList.add('show');
-      setTimeout(() => toast.classList.remove('show'), 1800);
-    }
-    document.querySelectorAll('.app-card[data-state="coming-soon"]').forEach(card => {
-      card.addEventListener('click', (e) => {
-        if (e.target.closest('a')) return; // a태그 클릭은 통과
-        showToast('Coming soon.');
       });
-    });
+    }, { threshold: 0.1 });
+    reveals.forEach(el => observer.observe(el));
 
+    // Email copy
     const emailTile = document.querySelector('.contact-email');
-    if (emailTile) {
-      const emailText = emailTile.getAttribute('data-email') || 'contact@stannum.app';
-      emailTile.addEventListener('click', async () => {
-        try {
-          await navigator.clipboard.writeText(emailText);
-          showToast('이메일 주소가 복사되었습니다.');
-        } catch (e) { showToast('복사에 실패했습니다.'); }
-      });
-    }
-    document.querySelectorAll('.contact-grid a.tile').forEach(link => {
-      link.addEventListener('click', (e) => {
-        e.preventDefault();
-        showToast('Coming soon.');
-      });
+    emailTile.addEventListener('click', () => {
+      navigator.clipboard.writeText(emailTile.dataset.email);
+      alert('이메일 주소가 복사되었습니다.');
     });
   </script>
 </body>
-
 </html>
