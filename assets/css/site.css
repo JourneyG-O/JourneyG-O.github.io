@@ -1,0 +1,100 @@
+:root {
+  --color-background: #fff;
+  --color-text: #111;
+  --color-muted: #6e6e6e;
+  --color-border: #eaeaea;
+  --content-width: 960px;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  color: var(--color-text);
+  background: var(--color-background);
+  font-family: system-ui, -apple-system, Inter, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+  line-height: 1.7;
+}
+a { color: inherit; text-decoration: none; }
+a:focus-visible, button:focus-visible { outline: 3px solid #4b6a8a; outline-offset: 5px; }
+section[id] { scroll-margin-top: 100px; }
+.skip-link { position: fixed; top: 8px; left: 8px; z-index: 1100; padding: 10px 16px; background: #111; color: #fff; transform: translateY(-150%); }
+.skip-link:focus { transform: translateY(0); }
+
+/* Branding appears once while the large artwork is on screen. */
+.site-header { position: fixed; inset: 0 0 auto; height: 80px; z-index: 1000; backdrop-filter: saturate(180%) blur(6px); background: rgba(255,255,255,.9); border-bottom: 1px solid var(--color-border); }
+.site-header__inner { max-width: var(--content-width); margin: 0 auto; height: 100%; display: flex; align-items: center; justify-content: space-between; padding: 0 20px; }
+.site-brand { display: flex; align-items: center; font-weight: 700; letter-spacing: .3px; }
+.site-brand__mark { display: block; width: 0; height: 32px; margin-right: 0; opacity: 0; transition: width .2s ease, margin-right .2s ease, opacity .2s ease; }
+.site-header.is-brand-visible .site-brand__mark { width: 32px; margin-right: 10px; opacity: 1; }
+.site-nav { display: flex; gap: 24px; }
+.site-nav a { font-size: 15px; }
+.site-nav a:hover { opacity: .7; }
+
+/* One opening screen contains both the artwork and existing brand copy. */
+.brand-hero { min-height: 100vh; min-height: 100svh; padding: 120px 20px 64px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 28px; text-align: center; background: radial-gradient(ellipse at 50% 40%, #fafafa, #fff 70%); }
+.brand-hero__artwork { position: relative; display: grid; place-items: center; }
+.brand-glow { position: absolute; width: 340px; height: 340px; border-radius: 50%; background: radial-gradient(circle, rgba(200,200,200,.4), transparent 70%); filter: blur(60px); animation: pulse 4.2s ease-in-out infinite alternate; pointer-events: none; }
+.brand-artwork { position: relative; width: 300px; height: 300px; background: url('../images/stannum-logo.png') center / contain no-repeat; animation: float 4.8s ease-in-out infinite alternate; }
+.brand-hero__copy { max-width: 640px; }
+.hero-title { font-size: clamp(28px, 4vw, 44px); font-weight: 800; line-height: 1.2; margin: 0 0 16px; letter-spacing: -.02em; }
+.hero-description { color: var(--color-muted); font-size: 18px; margin: 0; }
+
+/* Released apps share a repeatable layout, independent of their count. */
+.apps-section { max-width: var(--content-width); margin: 0 auto; padding: 64px 20px 80px; }
+.section-title { margin: 0 0 32px; font-size: 28px; }
+.app-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px; }
+.app-card { min-width: 0; display: flex; flex-direction: column; border: 1px solid var(--color-border); border-radius: 24px; overflow: hidden; transition: opacity .6s ease, transform .6s ease; }
+.app-artwork { display: grid; place-items: center; background: #f7f7f8; padding: 44px 24px; }
+.app-icon { width: 128px; height: 128px; border-radius: 28px; object-fit: contain; background: #fff; box-shadow: 0 12px 28px rgba(0,0,0,.07); transition: transform .25s ease; }
+.app-card:hover .app-icon { transform: translateY(-4px); }
+.app-content { padding: 28px; display: flex; flex-direction: column; flex: 1; text-align: left; }
+.badges { display: flex; flex-wrap: wrap; gap: 8px; }
+.badge { font-size: 11px; font-weight: 600; padding: 4px 10px; border-radius: 6px; background: #f5f5f7; color: #66666c; }
+.app-title { font-size: 28px; font-weight: 800; line-height: 1.25; margin: 16px 0 12px; letter-spacing: -.5px; }
+.app-description { font-size: 16px; color: var(--color-muted); line-height: 1.6; margin: 0 0 24px; }
+.app-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: auto; }
+.button { display: inline-flex; justify-content: center; align-items: center; padding: 10px 16px; background: #111; color: #fff; border: 1px solid #111; border-radius: 999px; font-size: 13px; font-weight: 600; transition: background .2s ease; }
+.button:hover { background: #333; }
+.button--secondary { color: #111; background: #fff; border-color: #d0d0d0; }
+.button--secondary:hover { background: #f7f7f7; }
+.upcoming-app { display: flex; align-items: center; gap: 24px; margin-top: 28px; padding: 28px; border: 1px dashed #d5d5d5; border-radius: 20px; transition: opacity .6s ease, transform .6s ease; }
+.upcoming-app .app-artwork { padding: 0; background: none; }
+.upcoming-app .app-icon { width: 72px; height: 72px; border-radius: 16px; filter: grayscale(1); opacity: .7; box-shadow: none; }
+.upcoming-app .app-content { padding: 0; }
+.upcoming-app .app-title { font-size: 22px; margin: 10px 0 8px; }
+.upcoming-app .app-description { margin: 0; font-size: 15px; }
+.is-reveal-pending { opacity: 0; transform: translateY(20px); }
+
+.contact { padding: 72px 20px; text-align: center; border-top: 1px solid var(--color-border); }
+.contact h2 { margin: 0; font-size: 28px; }
+.contact-links { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; max-width: 600px; margin: 32px auto 0; }
+.contact-link { display: flex; flex-direction: column; align-items: center; gap: 12px; padding: 24px; border: 1px solid var(--color-border); border-radius: 16px; font: inherit; color: inherit; background: #fff; cursor: pointer; transition: background .2s ease, transform .2s ease; }
+.contact-link:hover { background: #f7f7f7; transform: translateY(-2px); }
+.contact-icon { width: 32px; height: 32px; object-fit: contain; }
+.contact-status { min-height: 1.7em; margin: 8px 0 0; color: var(--color-muted); }
+footer { padding: 40px 20px; text-align: center; border-top: 1px solid var(--color-border); color: var(--color-muted); font-size: 14px; }
+.footer-links { display: flex; justify-content: center; flex-wrap: wrap; gap: 12px 24px; margin: 20px 0; }
+.footer-links a:hover { text-decoration: underline; }
+@keyframes float { from { transform: translateY(0); } to { transform: translateY(-20px); } }
+@keyframes pulse { from { opacity: .5; } to { opacity: 1; } }
+@media (max-width: 640px) {
+  .site-nav { gap: 16px; }
+  .brand-hero { padding: 112px 20px 48px; gap: 24px; }
+  .brand-artwork { width: min(300px, 80vw); height: min(300px, 80vw); }
+  .brand-glow { width: 280px; height: 280px; }
+  .hero-description { font-size: 16px; }
+  .apps-section { padding-top: 48px; padding-bottom: 56px; }
+  .app-grid { grid-template-columns: 1fr; gap: 24px; }
+  .app-artwork { padding: 32px 24px; }
+  .app-content { padding: 24px; }
+  .upcoming-app { gap: 16px; padding: 24px; align-items: flex-start; }
+  .upcoming-app .app-icon { width: 56px; height: 56px; border-radius: 13px; }
+  .contact { padding: 56px 20px; }
+  .contact-links { gap: 12px; }
+  .contact-link { padding: 20px 8px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+  .is-reveal-pending { opacity: 1; transform: none; }
+}

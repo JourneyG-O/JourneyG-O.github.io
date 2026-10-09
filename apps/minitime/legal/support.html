@@ -4,47 +4,12 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>MiniTime — Support</title>
-<style>
-  :root{ --bg:#ffffff; --fg:#111; --muted:#6e6e6e; --line:#eaeaea; --maxw:720px; }
-  html,body{ margin:0; background:var(--bg); color:var(--fg);
-    font-family:system-ui,-apple-system,Inter,"Apple SD Gothic Neo",Malgun Gothic,sans-serif; line-height:1.7; }
-  .wrap{ max-width:var(--maxw); margin:0 auto; padding:28px 20px 72px; }
-  h1{ font-size:24px; margin:0 0 10px }
-  .meta{ color:var(--muted); font-size:14px; margin-bottom:24px }
-  h2{ font-size:18px; margin:22px 0 8px }
-  h3{ font-size:16px; margin:18px 0 6px }
-  hr{ border:0; border-top:1px solid var(--line); margin:20px 0 }
-  ul{ padding-left:18px }
-  .home-btn {
-    display: inline-block;
-    margin-top: 24px;
-    font-size: 14px;
-    color: var(--fg);
-    border: 1px solid var(--line);
-    border-radius: 999px;
-    padding: 8px 12px;
-    text-decoration: none;
-    background: #fff;
-    transition: background 0.2s ease;
-  }
-  .home-btn:hover { background:#f7f7f7 }
-  .card{
-    border:1px solid var(--line);
-    border-radius:12px;
-    padding:16px;
-    margin:14px 0;
-    background:#fff;
-  }
-  .muted{ color:var(--muted) }
-  code{ background:#f7f7f7; padding:2px 6px; border-radius:6px }
-  a{ color:#0b57d0; text-decoration:none }
-  a:hover{ text-decoration:underline }
-</style>
+<link rel="stylesheet" href="../../../assets/css/documents.css" />
 </head>
 <body>
-  <main class="wrap">
+  <main class="document-container">
     <h1>MiniTime — Support</h1>
-    <div class="meta">Last updated: November 7, 2025 · Operator: Stannum · Contact: contact@stannum.app</div>
+    <div class="document-meta">Last updated: November 7, 2025 · Operator: Stannum · Contact: contact@stannum.app</div>
     <hr/>
 
     <h2>Overview</h2>
@@ -55,22 +20,22 @@
 
     <h2>Quick Help / FAQ</h2>
 
-    <div class="card">
+    <div class="support-card">
       <h3>How do I restore my purchase?</h3>
       <ol>
         <li>Open MiniTime &rarr; <em>Settings</em>.</li>
         <li>Tap <strong>Restore Purchases</strong> and sign in with the Apple ID you used to buy MiniTime Pro.</li>
         <li>After a moment, Pro should be re-enabled. If you still don’t see Pro, force-quit and reopen the app.</li>
       </ol>
-      <p class="muted">Note: Restores work only with the same Apple ID that originally purchased MiniTime Pro.</p>
+      <p class="text-muted">Note: Restores work only with the same Apple ID that originally purchased MiniTime Pro.</p>
     </div>
 
-    <div class="card">
+    <div class="support-card">
       <h3>I see only up to 3 timers. Is that normal?</h3>
       <p>Yes. The free version lets you create up to three timers. MiniTime Pro unlocks unlimited timers and additional options.</p>
     </div>
 
-    <div class="card">
+    <div class="support-card">
       <h3>I can’t hear the alert sound.</h3>
       <ul>
         <li>Check your device volume and Silent Mode.</li>
@@ -79,7 +44,7 @@
       </ul>
     </div>
 
-    <div class="card">
+    <div class="support-card">
       <h3>App crashes or doesn’t respond.</h3>
       <ul>
         <li>Update to the latest iOS and the latest MiniTime version.</li>
@@ -110,7 +75,7 @@
     <p>Please review our <a href="terms.html">Terms of Service</a> for information about in-app purchases, user obligations, and governing law.</p>
 
     <hr/>
-    <a class="home-btn" href="https://stannum.app">← Back to Stannum</a>
+    <a class="home-link" href="../../../index.html">← Back to Stannum</a>
   </main>
 </body>
 </html>

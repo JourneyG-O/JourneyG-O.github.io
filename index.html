@@ -1,288 +1,140 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en">
 
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="Explore Year Journey and MiniTime by Stannum. Find app details, App Store downloads, support, and privacy policies." />
   <title>Stannum — Every day, by your side.</title>
-  <style>
-    :root {
-      --bg: #ffffff;
-      --fg: #111;
-      --muted: #6e6e6e;
-      --line: #eaeaea;
-      --gap: 24px;
-      --radius: 12px;
-      --maxw: 960px;
-      --float-translate: 28px;
-      --float-rotate: 6deg;
-      --float-duration: 4.8s;
-      --orbit-duration: 12s;
-      --pulse-duration: 4.2s;
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      :root {
-        --float-translate: 0px;
-        --float-rotate: 0deg;
-        --float-duration: 0s;
-        --orbit-duration: 0s;
-        --pulse-duration: 0s;
-      }
-    }
-
-    * { box-sizing: border-box }
-
-    html, body {
-      margin: 0; color: var(--fg); background: var(--bg);
-      font-family: system-ui, -apple-system, Inter, "Apple SD Gothic Neo", Malgun Gothic, sans-serif;
-      line-height: 1.7; scroll-behavior: smooth;
-      overflow-x: hidden;
-    }
-
-    a { color: inherit; text-decoration: none }
-
-    /* Header */
-    .header {
-      position: fixed; top: 0; left: 0; right: 0; height: 80px; z-index: 1000;
-      backdrop-filter: saturate(180%) blur(6px); background: rgba(255, 255, 255, .9);
-      border-bottom: 1px solid var(--line);
-    }
-    .header-inner {
-      max-width: var(--maxw); margin: 0 auto; height: 100%;
-      display: flex; align-items: center; justify-content: space-between; padding: 0 20px;
-    }
-    .brand { display: flex; align-items: center; gap: 10px; font-weight: 700; letter-spacing: .3px }
-    .brand img { width: 24px; height: 24px; display: block }
-    .nav a { margin-left: 24px; font-size: 15px }
-    .nav a:hover { opacity: .7 }
-
-    /* Visual Section */
-    .visual {
-      position: relative; height: 100vh;
-      display: flex; align-items: center; justify-content: center;
-      background: radial-gradient(1200px 800px at 50% 40%, #fafafa, #ffffff 70%);
-      overflow: hidden;
-    }
-    .light {
-      position: absolute; width: 340px; height: 340px; border-radius: 50%;
-      background: radial-gradient(circle, rgba(200, 200, 200, .45), transparent 70%);
-      filter: blur(70px); animation: pulse var(--pulse-duration) ease-in-out infinite alternate;
-    }
-    .cube {
-      position: relative; width: 200px; height: 200px;
-      background: url('./assets/images/stannum_logo.png') center / contain no-repeat;
-      animation: float var(--float-duration) ease-in-out infinite alternate;
-    }
-    .brand-under {
-      position: absolute; left: 50%; bottom: 60px; transform: translateX(-50%);
-      font-size: 20px; font-weight: 700; opacity: 0;
-      animation: brandUnderIn .9s ease-out .15s forwards;
-    }
-
-    /* Hero Section */
-    .hero { padding: 160px 20px 80px; text-align: center; }
-    .tagline { font-size: 44px; font-weight: 800; margin-bottom: 16px; letter-spacing: -0.02em; }
-    .subcopy { color: var(--muted); font-size: 18px; margin-bottom: 32px; }
-
-    /* Apps Section (The Minimal Stack) */
-    .apps-section { padding: 120px 20px; }
-    .apps-container { max-width: 840px; margin: 0 auto; display: flex; flex-direction: column; gap: 100px; }
-    
-    .app-row {
-      display: flex; align-items: center; gap: 60px;
-      opacity: 0; transform: translateY(30px);
-      transition: all 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
-    }
-    .app-row.on { opacity: 1; transform: translateY(0); }
-    .app-row:nth-child(even) { flex-direction: row-reverse; }
-
-    .app-visual { flex: 1; display: flex; justify-content: center; }
-    .app-main-icon {
-      width: 140px; height: 140px; border-radius: 32px;
-      border: 2px solid #000; padding: 4px; background: #fff;
-      box-shadow: 0 15px 35px rgba(0,0,0,0.08); transition: transform 0.3s ease;
-    }
-    .app-row:hover .app-main-icon { transform: scale(1.05) rotate(-2deg); }
-
-    .app-info-box { flex: 1.2; text-align: left; }
-    .app-row:nth-child(even) .app-info-box { text-align: right; }
-
-    .app-title-big { font-size: 32px; font-weight: 800; margin: 12px 0; letter-spacing: -0.5px; }
-    .app-description-text { font-size: 16px; color: var(--muted); line-height: 1.6; margin-bottom: 24px; word-break: keep-all; }
-    
-    .badges { display: flex; gap: 8px; margin-bottom: 12px; }
-    .app-row:nth-child(even) .badges { justify-content: flex-end; }
-    .badge { font-size: 11px; font-weight: 600; padding: 4px 10px; border-radius: 6px; background: #f5f5f7; color: #86868b; }
-
-    .app-link-btn {
-      display: inline-flex; align-items: center; padding: 10px 20px;
-      background: #111; color: #fff; border-radius: 999px;
-      font-size: 14px; font-weight: 600; transition: transform 0.2s;
-    }
-    .app-link-btn:hover { transform: scale(1.03); background: #333; }
-
-    /* Contact & Footer */
-    .contact { padding: 120px 20px; text-align: center; border-top: 1px solid var(--line); }
-    .contact-grid {
-      display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-      gap: 20px; max-width: 600px; margin: 40px auto 0;
-    }
-    .tile {
-      display: flex; flex-direction: column; align-items: center; gap: 12px;
-      padding: 24px; border: 1px solid var(--line); border-radius: 16px;
-      transition: all 0.2s ease; cursor: pointer;
-    }
-    .tile:hover { background: #f7f7f7; transform: translateY(-2px); }
-    .contact-icon { width: 32px; height: 32px; object-fit: contain; }
-
-    footer { padding: 60px 20px; text-align: center; border-top: 1px solid var(--line); color: var(--muted); font-size: 14px; }
-
-    /* Animations */
-    @keyframes float { 0% { transform: translateY(0) } 100% { transform: translateY(-20px) } }
-    @keyframes pulse { 0% { opacity: .5 } 100% { opacity: 1 } }
-    @keyframes brandUnderIn { from { opacity: 0; transform: translate(-50%, 10px) } to { opacity: 1; transform: translate(-50%, 0) } }
-
-    @media (max-width: 768px) {
-      .app-row, .app-row:nth-child(even) { flex-direction: column; text-align: center; gap: 32px; }
-      .app-row:nth-child(even) .app-info-box { text-align: center; }
-      .app-row:nth-child(even) .badges { justify-content: center; }
-      .tagline { font-size: 32px; }
-    }
-  </style>
+  <link rel="stylesheet" href="./assets/css/site.css" />
+  <script src="./assets/js/site.js" defer></script>
 </head>
 
 <body>
-  <header class="header">
-    <div class="header-inner">
-      <a class="brand" href="#top">
-        <img src="./assets/images/stannum_mark.svg" alt="Logo"> Stannum
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <header class="site-header">
+    <div class="site-header__inner">
+      <a class="site-brand" href="#top">
+        <img class="site-brand__mark" src="./assets/images/stannum-logo.png" alt="" width="32" height="32">
+        <span>Stannum</span>
       </a>
-      <nav class="nav">
+      <nav class="site-nav" aria-label="Main navigation">
         <a href="#apps">Apps</a>
         <a href="#contact">Contact</a>
       </nav>
     </div>
   </header>
 
-  <div id="top" class="visual">
-    <div class="light"></div>
-    <div class="cube" id="cube"></div>
-    <div class="brand-under">Stannum</div>
-  </div>
+  <main id="main-content">
+    <section id="top" class="brand-hero" aria-labelledby="hero-title">
+      <div class="brand-hero__artwork">
+        <div class="brand-glow" aria-hidden="true"></div>
+        <div class="brand-artwork" aria-hidden="true"></div>
+      </div>
+      <div class="brand-hero__copy">
+        <h1 id="hero-title" class="hero-title">Every day, by your side.</h1>
+        <p class="hero-description">Small tools that blend quietly into your everyday life.</p>
+      </div>
+    </section>
 
-  <section class="hero">
-    <div class="wrap">
-      <h1 class="tagline">Every day, by your side.</h1>
-      <p class="subcopy">Small tools that blend quietly into your everyday life.</p>
-    </div>
-  </section>
+    <section id="apps" class="apps-section" aria-labelledby="apps-title">
+      <h2 id="apps-title" class="section-title">Apps</h2>
+      <div class="app-grid">
 
-  <section id="apps" class="apps-section">
-    <div class="apps-container">
-      
-      <div class="app-row reveal">
-        <div class="app-visual">
-          <img src="./assets/images/apps/YearJourney.png" alt="Year Journey" class="app-main-icon">
-        </div>
-        <div class="app-info-box">
-          <div class="badges">
-            <span class="badge">iOS</span>
-            <span class="badge">Widget</span>
+        <article class="app-card" data-reveal>
+          <div class="app-artwork">
+            <img src="./assets/images/apps/YearJourney.png" alt="Year Journey" class="app-icon" width="128" height="128" loading="lazy">
           </div>
-          <h3 class="app-title-big">Year Journey</h3>
-          <p class="app-description-text">
-            Track your year's progress with adorable animal companions. 
-            A warm visualization of time passing.
-          </p>
-          <a href="apps/yearjourney/index.html" class="app-link-btn">Explore App →</a>
-        </div>
-      </div>
-
-      <div class="app-row reveal">
-        <div class="app-visual">
-          <img src="./assets/images/apps/minitime.png" alt="MiniTime" class="app-main-icon">
-        </div>
-        <div class="app-info-box">
-          <div class="badges">
-            <span class="badge">iPhone</span>
-            <span class="badge">iPad</span>
+          <div class="app-content">
+            <div class="badges">
+              <span class="badge">iOS</span>
+              <span class="badge">Widget</span>
+            </div>
+            <h3 class="app-title">Year Journey</h3>
+            <p class="app-description">
+              Track your year's progress with adorable animal companions.
+              A warm visualization of time passing.
+            </p>
+            <div class="app-actions">
+              <a href="https://apps.apple.com/app/id6757995828" class="button">Download on the App Store</a>
+              <a href="apps/yearjourney/index.html" class="button button--secondary">View Details →</a>
+            </div>
           </div>
-          <h3 class="app-title-big">MiniTime</h3>
-          <p class="app-description-text">
-            A minimal focus timer designed for simplicity. 
-            Operated with a single tap and drag.
-          </p>
-          <a href="apps/minitime/index.html" class="app-link-btn">View Details →</a>
-        </div>
-      </div>
+        </article>
 
-      <div class="app-row reveal">
-        <div class="app-visual">
-          <img src="./assets/images/apps/minilink.png" alt="MiniLink" class="app-main-icon" style="filter: grayscale(1); opacity: 0.5;">
-        </div>
-        <div class="app-info-box">
-          <div class="badges">
-            <span class="badge">Coming Soon</span>
+        <article class="app-card" data-reveal>
+          <div class="app-artwork">
+            <img src="./assets/images/apps/minitime.png" alt="MiniTime" class="app-icon" width="128" height="128" loading="lazy">
           </div>
-          <h3 class="app-title-big" style="color: #ccc;">MiniLink</h3>
-          <p class="app-description-text">
-            Simplifying how you collect and rediscover links. 
-            Stay tuned for the new way of curation.
-          </p>
-        </div>
+          <div class="app-content">
+            <div class="badges">
+              <span class="badge">iPhone</span>
+              <span class="badge">iPad</span>
+            </div>
+            <h3 class="app-title">MiniTime</h3>
+            <p class="app-description">
+              A minimal focus timer designed for simplicity.
+              Operated with a single tap and drag.
+            </p>
+            <div class="app-actions">
+              <a href="https://apps.apple.com/app/id6754816350" class="button">Download on the App Store</a>
+              <a href="apps/minitime/index.html" class="button button--secondary">View Details →</a>
+            </div>
+          </div>
+        </article>
+
       </div>
 
-    </div>
-  </section>
+        <article class="upcoming-app" data-reveal>
+          <div class="app-artwork">
+            <img src="./assets/images/apps/minilink.png" alt="MiniLink" class="app-icon" width="128" height="128" loading="lazy">
+          </div>
+          <div class="app-content">
+            <div class="badges">
+              <span class="badge">Coming Soon</span>
+            </div>
+            <h3 class="app-title">MiniLink</h3>
+            <p class="app-description">
+              Simplifying how you collect and rediscover links.
+              Stay tuned for the new way of curation.
+            </p>
+          </div>
+        </article>
 
-  <section id="contact" class="contact">
-    <div class="wrap">
-      <h2>Contact</h2>
-      <div class="contact-grid">
-        <div class="tile contact-email" data-email="contact@stannum.app">
-          <img src="./assets/images/socials/email.png" alt="Email" class="contact-icon">
-          <span>Email</span>
+    </section>
+
+    <section id="contact" class="contact">
+      <div class="wrap">
+        <h2>Contact</h2>
+        <div class="contact-links">
+          <button type="button" class="contact-link" data-copy-email="contact@stannum.app" aria-label="Copy email address">
+            <img src="./assets/images/socials/email.png" alt="" width="32" height="32" class="contact-icon">
+            <span>Email</span>
+          </button>
+          <a class="contact-link" href="https://www.threads.com/@luyaluyy">
+            <img src="./assets/images/socials/threads.png" alt="" width="32" height="32" class="contact-icon">
+            <span>Threads</span>
+          </a>
+          <a class="contact-link" href="https://x.com/journey94go">
+            <img src="./assets/images/socials/x.png" alt="" width="32" height="32" class="contact-icon">
+            <span>X</span>
+          </a>
         </div>
-        <a class="tile" href="#">
-          <img src="./assets/images/socials/threads.png" alt="Threads" class="contact-icon">
-          <span>Threads</span>
-        </a>
-        <a class="tile" href="#">
-          <img src="./assets/images/socials/instagram.png" alt="Instagram" class="contact-icon">
-          <span>Instagram</span>
-        </a>
-        <a class="tile" href="#">
-          <img src="./assets/images/socials/x.png" alt="X" class="contact-icon">
-          <span>X</span>
-        </a>
+        <p class="contact-status" id="contact-status" role="status" aria-live="polite"></p>
       </div>
-    </div>
-  </section>
+    </section>
+  </main>
 
   <footer>
     <div class="footer-brand">Stannum</div>
+    <nav class="footer-links" aria-label="App support and policies">
+      <a href="apps/yearjourney/legal/support.html">Year Journey Support</a>
+      <a href="apps/yearjourney/legal/privacy.html">Year Journey Privacy</a>
+      <a href="apps/minitime/legal/support.html">MiniTime Support</a>
+      <a href="apps/minitime/legal/privacy.html">MiniTime Privacy</a>
+    </nav>
     <div>© 2026 Stannum. All rights reserved.</div>
   </footer>
 
-  <script>
-    // Reveal animation
-    const reveals = document.querySelectorAll('.reveal');
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('on');
-        }
-      });
-    }, { threshold: 0.1 });
-    reveals.forEach(el => observer.observe(el));
-
-    // Email copy
-    const emailTile = document.querySelector('.contact-email');
-    emailTile.addEventListener('click', () => {
-      navigator.clipboard.writeText(emailTile.dataset.email);
-      alert('이메일 주소가 복사되었습니다.');
-    });
-  </script>
 </body>
 </html>
