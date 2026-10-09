@@ -20,6 +20,7 @@
       </a>
       <nav class="site-nav" aria-label="Main navigation">
         <a href="#apps">Apps</a>
+        <a href="#about">About</a>
         <a href="#contact">Contact</a>
       </nav>
     </div>
@@ -108,9 +109,19 @@
 
     </section>
 
-    <section id="contact" class="contact">
-      <div class="wrap">
-        <h2>Contact</h2>
+    <section id="about" class="about" aria-labelledby="about-title">
+      <div class="about__inner">
+        <h2 id="about-title" class="section-title">About</h2>
+        <div class="about__content">
+          <p>My ideas often begin with something I notice or feel in everyday life. I like bringing small features to life through drawings, characters, and stories.</p>
+          <p>I hope the care I put into them comes through as <span class="about__warmth">a little warmth<svg class="about__underline" viewBox="0 0 200 16" preserveAspectRatio="none" aria-hidden="true"><path d="M3 10 C40 3, 83 12, 121 7 S173 5, 197 8" /></svg></span> when you use them.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="contact" aria-labelledby="contact-title">
+      <div class="section-inner">
+        <h2 id="contact-title" class="section-title">Contact</h2>
         <div class="contact-links">
           <button type="button" class="contact-link" data-copy-email="contact@stannum.app" aria-label="Copy email address">
             <img src="./assets/images/socials/email.png" alt="" width="32" height="32" class="contact-icon">
@@ -132,12 +143,6 @@
 
   <footer>
     <div class="footer-brand">Stannum</div>
-    <nav class="footer-links" aria-label="App support and policies">
-      <a href="apps/yearjourney/legal/support.html">Year Journey Support</a>
-      <a href="apps/yearjourney/legal/privacy.html">Year Journey Privacy</a>
-      <a href="apps/minitime/legal/support.html">MiniTime Support</a>
-      <a href="apps/minitime/legal/privacy.html">MiniTime Privacy</a>
-    </nav>
     <div>© 2026 Stannum. All rights reserved.</div>
   </footer>
 

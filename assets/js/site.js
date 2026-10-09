@@ -27,6 +27,20 @@ if (!reducedMotion.matches && 'IntersectionObserver' in window) {
   }
 }
 
+// The letter stays readable; only its decorative underline is animated.
+const aboutSection = document.querySelector('#about');
+if (aboutSection && !reducedMotion.matches && 'IntersectionObserver' in window) {
+  const underlineObserver = new IntersectionObserver(([entry]) => {
+    if (entry.isIntersecting) {
+      aboutSection.classList.remove('is-underline-pending');
+      aboutSection.classList.add('is-underline-drawn');
+      underlineObserver.unobserve(aboutSection);
+    }
+  }, { threshold: 0.25 });
+  underlineObserver.observe(aboutSection);
+  aboutSection.classList.add('is-underline-pending');
+}
+
 const copyEmailButton = document.querySelector('[data-copy-email]');
 const contactStatus = document.querySelector('#contact-status');
 
