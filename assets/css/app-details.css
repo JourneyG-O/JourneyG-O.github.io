@@ -9,6 +9,7 @@
 .detail-description { font-size: 18px; color: var(--color-muted); margin: 0 0 28px; max-width: 380px; }
 .detail-hero__visual { display: grid; place-items: center; padding: 32px; border: 1px solid #ece7de; border-radius: 28px; background: radial-gradient(ellipse at 100% 0%, #f1e3d3, transparent 70%), #f6f4ef; }
 .detail-preview { display: block; width: min(100%, 230px); height: auto; border-radius: 16px; box-shadow: 0 14px 32px rgba(57,45,32,.08); }
+.app-detail--minitime .detail-hero__visual { background: radial-gradient(ellipse at 100% 0%, #e9ecf0, transparent 70%), #f7f7f8; border-color: var(--color-border); }
 .detail-gallery { padding: 0 0 108px; }
 .detail-gallery__grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
 .detail-gallery figure { min-width: 0; margin: 0; }
