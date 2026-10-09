@@ -32,9 +32,39 @@ section[id] { scroll-margin-top: 100px; }
 
 /* One opening screen contains both the artwork and existing brand copy. */
 .brand-hero { min-height: 100vh; min-height: 100svh; padding: 120px 20px 64px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 28px; text-align: center; background: radial-gradient(ellipse at 50% 40%, #fafafa, #fff 70%); }
-.brand-hero__artwork { position: relative; display: grid; place-items: center; }
-.brand-glow { position: absolute; width: 340px; height: 340px; border-radius: 50%; background: radial-gradient(circle, rgba(200,200,200,.4), transparent 70%); filter: blur(60px); animation: pulse 4.2s ease-in-out infinite alternate; pointer-events: none; }
+.brand-hero__artwork { position: relative; display: grid; place-items: center; isolation: isolate; }
+.brand-glow { position: absolute; width: 380px; height: 340px; border-radius: 50%; background: radial-gradient(ellipse, rgba(147,163,159,.3), transparent 72%); filter: blur(20px); animation: pulse 6s ease-in-out infinite alternate; pointer-events: none; }
 .brand-artwork { position: relative; width: 300px; height: 300px; background: url('../images/stannum-logo.png') center / contain no-repeat; animation: float 4.8s ease-in-out infinite alternate; }
+/* Slow translucent mist sits behind the drawing, with occasional small glints. */
+.brand-glow::before, .brand-glow::after {
+  content: "";
+  position: absolute;
+  inset: 5% 12% 18% -4%;
+  border-radius: 50%;
+  background: radial-gradient(ellipse, rgba(128, 151, 148, .55), transparent 74%);
+  animation: mist-drift 10s ease-in-out infinite alternate;
+}
+.brand-glow::after {
+  inset: 24% -4% 2% 30%;
+  background: radial-gradient(ellipse, rgba(176, 161, 133, .4), transparent 74%);
+  animation-duration: 13s;
+  animation-delay: -7s;
+  animation-direction: alternate-reverse;
+}
+.brand-sparkles { position: absolute; inset: 0; pointer-events: none; }
+.brand-sparkle {
+  position: absolute;
+  width: 22px;
+  height: 22px;
+  left: 1%;
+  top: 23%;
+  opacity: 0;
+  background: #7e9993;
+  clip-path: polygon(50% 0, 60% 40%, 100% 50%, 60% 60%, 50% 100%, 40% 60%, 0 50%, 40% 40%);
+  animation: gentle-glint 6s ease-in-out infinite;
+}
+.brand-sparkle:nth-child(2) { left: 92%; top: 40%; width: 18px; height: 18px; background: #a89a74; animation-delay: -2s; }
+.brand-sparkle:nth-child(3) { left: 72%; top: 2%; width: 15px; height: 15px; animation-delay: -4s; }
 .brand-hero__copy { max-width: 640px; }
 .hero-title { font-size: clamp(28px, 4vw, 44px); font-weight: 800; line-height: 1.2; margin: 0 0 16px; letter-spacing: -.02em; }
 .hero-description { color: var(--color-muted); font-size: 18px; margin: 0; }
@@ -77,11 +107,20 @@ footer { padding: 40px 20px; text-align: center; border-top: 1px solid var(--col
 .footer-links a:hover { text-decoration: underline; }
 @keyframes float { from { transform: translateY(0); } to { transform: translateY(-20px); } }
 @keyframes pulse { from { opacity: .5; } to { opacity: 1; } }
+@keyframes mist-drift {
+  from { transform: translate(-35px, 16px) scale(.9); }
+  to { transform: translate(35px, -20px) scale(1.15); }
+}
+@keyframes gentle-glint {
+  0%, 5%, 65%, 100% { opacity: 0; transform: translateY(6px) scale(.55) rotate(-12deg); }
+  28% { opacity: .95; transform: translateY(0) scale(1) rotate(0deg); }
+  42% { opacity: .7; transform: translateY(-3px) scale(.8) rotate(8deg); }
+}
 @media (max-width: 640px) {
   .site-nav { gap: 16px; }
   .brand-hero { padding: 112px 20px 48px; gap: 24px; }
   .brand-artwork { width: min(300px, 80vw); height: min(300px, 80vw); }
-  .brand-glow { width: 280px; height: 280px; }
+  .brand-glow { width: 310px; max-width: 88vw; height: 280px; }
   .hero-description { font-size: 16px; }
   .apps-section { padding-top: 48px; padding-bottom: 56px; }
   .app-grid { grid-template-columns: 1fr; gap: 24px; }
